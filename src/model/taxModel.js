@@ -21,7 +21,7 @@ export default class TaxModel {
         FROM information_schema.TABLES
         WHERE (TABLE_SCHEMA = '${dbName}') AND (TABLE_NAME = '${this.tblName}')`;
 
-      const createTableQuery = `CREATE TABLE ${this.tblName} (ID decimal(18,0), name VARCHAR(255), tax_code INT, price DECIMAL(18, 2))`;
+      const createTableQuery = `CREATE TABLE ${this.tblName} (ID decimal(18,0) NOT NULL, name VARCHAR(255), tax_code INT, price DECIMAL(18, 2), INDEX ID (ID))`;
 
       this.connection.query(checkQuery, (err, res) => {
         if (err) reject(err);
