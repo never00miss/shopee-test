@@ -13,11 +13,6 @@ import this on your API tools or POSTMAN
 or
 - https://www.getpostman.com/collections/3a87d1f68343f83e4fe3
 
-
-## HOW TO TEST?
-
-- docker-compose up --file docker-compose-test.yml
-
 # API FLOW
 
 Description : 
