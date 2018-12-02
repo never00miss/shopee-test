@@ -1,0 +1,54 @@
+version: "3"
+volumes:
+  node_modules:
+  phpmyadmin_data:
+networks:
+  node-network:
+    driver: bridge
+services:
+  shopee-test:
+    build: .
+    environment:
+      - REGION=local
+      - ROLE=""
+      - IS_DEV=true
+      - MYSQL_DATABASE=app1
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=pass
+      - MYSQL_HOST=mysql
+    depends_on:
+      - mysql
+    command: bash -c "npm run dev"
+    ports:
+      - "3000:3000" # for sns offline event
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - node-network
+  mysql:
+    image: mysql/mysql-server:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=app1
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=pass
+      - MYSQL_ROOT_HOST=127.0.0.1
+    networks:
+      - node-network
+  phpmyadmin:
+    image: 'phpmyadmin/phpmyadmin:latest'
+    environment:
+      - PMA_HOST=mysql
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=app1
+    ports:
+      - '8081:80'
+    depends_on:
+      - mysql
+    volumes:
+      - 'phpmyadmin_data:/bitnami'
+    networks:
+      - node-network

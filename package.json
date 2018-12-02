@@ -1,0 +1,25 @@
+{
+  "name": "shopee-api",
+  "version": "1.0.0",
+  "description": "test case of shopee",
+  "main": "index.js",
+  "scripts": {
+    "dev": "serverless offline start --host 0.0.0.0 --port 3000",
+    "test": "nyc mocha --compilers js:babel-register,babel-polyfill tests/*"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "serverless-offline": "^3.31.3"
+  },
+  "dependencies": {
+    "esm": "^3.0.84",
+    "mysql": "^2.16.0"
+  }
+}
